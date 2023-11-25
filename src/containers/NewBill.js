@@ -58,13 +58,6 @@ export default class NewBill {
   
   handleSubmit = e => {
     e.preventDefault()
-
-    if (!this.fileName || !this.fileUrl) {
-      console.log('Veuillez sélectionner un fichier JPG, JPEG ou PNG.');
-      // Ajoutez ici la logique pour informer l'utilisateur du format non autorisé.
-      return; // Arrête la soumission si le format de fichier est invalide
-    }
-
     console.log('e.target.querySelector(`input[data-testid="datepicker"]`).value', e.target.querySelector(`input[data-testid="datepicker"]`).value)
     const email = JSON.parse(localStorage.getItem("user")).email
     const bill = {

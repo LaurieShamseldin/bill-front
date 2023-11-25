@@ -56,7 +56,9 @@ describe("Given I am connected as an employee", () => {
       })
     
       expect(isSorted).toBe(true)
-    })
+    });
     
-  })
+  });
+
+  
 })
