@@ -13,11 +13,13 @@ import router from "../app/Router.js";
 describe("Given I am connected as an employee", () => {
   describe("When I am on Bills Page", () => {
     test("Then bill icon in vertical layout should be highlighted", async () => {
-
+      // Définition du local storage
       Object.defineProperty(window, 'localStorage', { value: localStorageMock })
+      // Simulation de l'utilisateur type employé
       window.localStorage.setItem('user', JSON.stringify({
         type: 'Employee'
       }))
+      // Corps du document
       const root = document.createElement("div")
       root.setAttribute("id", "root")
       document.body.append(root)
@@ -25,6 +27,8 @@ describe("Given I am connected as an employee", () => {
       window.onNavigate(ROUTES_PATH.Bills)
       await waitFor(() => screen.getByTestId('icon-window'))
       const windowIcon = screen.getByTestId('icon-window')
+      // Vérification que "icon window" a bien la classe active icon
+      expect(windowIcon.classList.contains("active-icon")).toBe(true);
       //to-do write expect expression
 
     })
