@@ -22,8 +22,8 @@ const row = (bill) => {
   const rows = (data) => {
     return data && data.length
       ? data
-          // Fix order bills
-          .sort((a, b) => (a.date < b.date ? 1 : -1))
+          // Fix order bills based on date comparison
+          .sort((a, b) => new Date(a.date) - new Date(b.date))
           .map((bill) => row(bill))
           .join("")
       : "";

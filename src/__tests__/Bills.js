@@ -28,12 +28,31 @@ describe("Given I am connected as an employee", () => {
       //to-do write expect expression
 
     })
+    // test("Then bills should be ordered from earliest to latest", () => {
+    //   document.body.innerHTML = BillsUI({ data: bills })
+    //   const dates = screen.getAllByText(/^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i).map(a => a.innerHTML)
+    //   const antiChrono = (a, b) => ((a < b) ? 1 : -1)
+    //   const datesSorted = [...dates].sort(antiChrono)
+    //   expect(dates).toEqual(datesSorted)
+    // })
+
     test("Then bills should be ordered from earliest to latest", () => {
       document.body.innerHTML = BillsUI({ data: bills })
-      const dates = screen.getAllByText(/^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i).map(a => a.innerHTML)
-      const antiChrono = (a, b) => ((a < b) ? 1 : -1)
-      const datesSorted = [...dates].sort(antiChrono)
-      expect(dates).toEqual(datesSorted)
+    
+      // Récupération des éléments contenant les dates des factures
+      const datesElements = screen.getAllByText(/^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i)
+    
+      // Extraction des dates et conversion en objets Date
+      const dates = datesElements.map(dateElement => new Date(dateElement.textContent))
+    
+      // Vérification du tri des dates
+      const isSorted = dates.every((date, index) => {
+        if (index === 0) return true; // Premier élément, donc déjà trié
+        return date >= dates[index - 1]; // Vérification du tri croissant
+      })
+    
+      expect(isSorted).toBe(true)
     })
+    
   })
 })
